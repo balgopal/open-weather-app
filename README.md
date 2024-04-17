@@ -28,7 +28,7 @@ To Get started with the library management system you can follow these steps:
 
 2. Navigate to the project directory:
 
-	`cd library-management-system`
+	`cd open-weather-app`
 
 3. Install dependencies:
 
