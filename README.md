@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+# Open Weather App
+
+This project is a weather application developed using Next.js 14 and Material-UI for UI components. It leverages the OpenWeatherMap API to fetch weather data and provides various functionalities to enhance the user experience.
+
+## Features
+
+### 1. Geolocation
+
+-   **Automated Location Detection**: Implement geolocation functionality to automatically detect the user's location.
+-   **Weather Data Fetching**: Fetch weather data based on the user's detected location.
+
+### 2. Current Weather Display
+
+-   **Detailed Conditions**: Display current weather conditions, including temperature, humidity, wind speed, and weather icon.
+
+### 3. Hourly Forecast
+
+-   **Hourly Updates**: Provide an hourly forecast for the next 24 hours, including temperature and weather conditions.
 
 ## Getting Started
 
-First, run the development server:
+To Get started with the library management system you can follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Clone the repository to your local machine:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+	`git clone https://github.com/balgopal/open-weather-app.git` 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. Navigate to the project directory:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+	`cd library-management-system`
 
-## Learn More
+3. Install dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+	`npm install`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Run the development server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+	`npm run dev`
+  
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to access the application.
 
-## Deploy on Vercel
+## Implementation Details
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The system is implemented using [Next.js](https://nextjs.org/) framework, for efficient user interface management. It leverages Material-UI components to enhance aesthetics and functionality, providing a sleek and intuitive user experience.
