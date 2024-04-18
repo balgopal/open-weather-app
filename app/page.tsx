@@ -217,7 +217,7 @@ export default function Home() {
                 <h4 className="text-white text-7xl font-semibold">
                   {weatherData.main.temp}&deg;c
                 </h4>
-                <img src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`} alt="Weather App" width={75} height={75} className="" />            
+                <img src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`} alt="Weather App" width={150} height={150} className="" />            
               </div>
               <div className="grid grid-cols-4 gap-2 mt-10">
                 <div className="bg-white/80 shadow-xl rounded p-4 flex flex-col items-center">
