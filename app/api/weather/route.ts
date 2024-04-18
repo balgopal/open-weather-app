@@ -8,9 +8,9 @@ export async function GET(req: NextRequest){
 
     let url = "";
     if(address){
-        url = `${process.env.NEXT_PUBLIC_API}/weather?q=${address}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=metric`;
+        url = `${process.env.NEXT_PUBLIC_WEATHER_API}/weather?q=${address}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=metric`;
     } else {
-        url = `${process.env.NEXT_PUBLIC_API}/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=metric`;
+        url = `${process.env.NEXT_PUBLIC_WEATHER_API}/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=metric`;
     }
     const res = await fetch(url);
     const data = await res.json();

@@ -4,6 +4,48 @@ import { useEffect, useState } from "react";
 import { OutlinedInput, InputAdornment } from '@mui/material';
 import { LocationOnOutlined, AirOutlined, WaterDropOutlined, FilterDramaOutlined, CompareArrowsOutlined } from '@mui/icons-material';
 
+type DateTime = {
+  year: number;
+  month: string;
+  day: string;
+  hours: string;
+  minutes: string;
+  seconds: string;
+}
+
+type CurrentWeather = {
+  name: string;
+  weather: Weather[];
+  main: Main;
+  clouds: Clouds;
+  wind: Wind;
+}
+
+type ForecastWeather = {
+  list: ListForecastWeather[]
+}
+
+type ListForecastWeather = {
+  dt: number;
+  main: Main;
+}
+
+type Weather = {
+  icon: string;
+}
+type Main = {
+  temp: string;
+  humidity: string;
+  pressure: string;
+}
+type Wind = {
+  speed: string;
+  deg: string;
+}
+type Clouds = {
+  all: string;
+}
+
 function getCurrentDateTime(offsetSeconds: number) {
   const systemOffsetSeconds = new Date().getTimezoneOffset() * -60;
   //console.log(systemOffsetSeconds);
@@ -60,14 +102,14 @@ function formatTimestampToHourMinute(timestamp: number) {
 }
 
 export default function Home() {
-  const [timeData, setTimeDate] = useState(null);
-  const [weatherData, setWeatherData] = useState(null);
-  const [forecastData, setForecastData] = useState(null);
+  const [timeData, setTimeDate] = useState<DateTime | null>(null);
+  const [weatherData, setWeatherData] = useState<CurrentWeather | null>(null);
+  const [forecastData, setForecastData] = useState<ForecastWeather | null>(null);
   const [loading, setLoading] = useState(false);
 
   async function fetchDataByCityName(cityName: string) {
     try {
-      const res = await fetch(`http://localhost:3000/api/weather?address=${cityName}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/weather?address=${cityName}`);
       const jsonData = (await res.json()).data;
       if(jsonData.cod == 200) {
         const timeData = getCurrentDateTime(jsonData.timezone);
@@ -85,10 +127,10 @@ export default function Home() {
 
   async function fetchDataByCoordinates(latitude: number, longitude: number) {
     try {
-      const res = await fetch(`http://localhost:3000/api/weather?lat=${latitude}&lon=${longitude}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/weather?lat=${latitude}&lon=${longitude}`);
       const jsonData = (await res.json()).data;
-      const timeData = getCurrentDateTime(jsonData.timezone);
-      setTimeDate(timeData);
+      const time = getCurrentDateTime(jsonData.timezone);
+      setTimeDate(time);
       setWeatherData(jsonData);
     } catch (err) {
       console.log(err);
@@ -97,7 +139,7 @@ export default function Home() {
 
   async function fetchHourlyDataByCityName(cityName: string){
     try {
-      const res = await fetch(`http://localhost:3000/api/forecast?address=${cityName}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/forecast?address=${cityName}`);
       const jsonData = (await res.json()).data;
       if(jsonData.cod == 200) {
         setForecastData(jsonData);
@@ -112,7 +154,7 @@ export default function Home() {
 
   async function fetchHourlyDataByCoordinates(latitude: number, longitude: number){
     try {
-      const res = await fetch(`http://localhost:3000/api/forecast?lat=${latitude}&lon=${longitude}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/forecast?lat=${latitude}&lon=${longitude}`);
       const jsonData = (await res.json()).data;
       setForecastData(jsonData);
     } catch (err) {
@@ -120,7 +162,7 @@ export default function Home() {
     }
   }
 
-  async function searchLocation(cityName){
+  async function searchLocation(cityName: string){
     await fetchDataByCityName(cityName);
     await fetchHourlyDataByCityName(cityName);
   }
@@ -166,10 +208,10 @@ export default function Home() {
           <div>
               <h1 className="text-white text-xl font-bold mt-2">{weatherData.name}</h1>
               <h2 className="text-white text-lg font-light mt-2">
-                {timeData.month} {timeData.day}, {timeData.year}
+                {timeData?.month} {timeData?.day}, {timeData?.year}
               </h2>
               <h3 className="text-white text-3xl font-medium mt-4">
-                {timeData.hours}:{timeData.minutes}
+                {timeData?.hours}:{timeData?.minutes}
               </h3>
               <div className="flex justify-between items-center my-6">
                 <h4 className="text-white text-7xl font-semibold">
